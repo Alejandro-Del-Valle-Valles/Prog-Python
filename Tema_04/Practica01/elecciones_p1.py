@@ -1,4 +1,5 @@
 #ANDALUCÍA
+#Ejercicio de Alejandro del Valle Vallés
 
 almeria = ("Almeria",  5, [("PP", 134328), ("PSOE", 115558), ("IU", 11742), ("PA", 6554),  ("Otros", 2871)])
    
@@ -24,12 +25,12 @@ def PorcentajePartido(escrutinio, partido) -> int:
     total_votos_partido = next((votos for p, votos in escrutinio[2] if p == partido), 0)
     return int((total_votos_partido / total_votos)*100)
 
-def HayPartidoExcluido(escrutinio):
-    pass
+def HayPartidoExcluido(escrutinio) -> bool:
+    return any(porcentaje < 3 for _, porcentaje in PorcentajeEscrutinio(escrutinio))
 
-def PorcentajeEscrutinio(escrutinio):
-    pass
+def PorcentajeEscrutinio(escrutinio) -> list:
+    return [(item[0], PorcentajePartido(escrutinio, item[0])) for item in escrutinio[2]]
 
 def ExclusionPequenos(escrutinio):
-    pass
+    return [item for item in PorcentajeEscrutinio(escrutinio) if item[1] > 3]
 
