@@ -21,9 +21,8 @@ def SumaVotos(escrutinio: tuple) -> int:
     return sum(votos for _, votos in escrutinio[2])
 
 def PorcentajePartido(escrutinio, partido) -> int:
-    total_votos = SumaVotos(escrutinio)
     total_votos_partido = next((votos for p, votos in escrutinio[2] if p == partido), 0)
-    return int((total_votos_partido / total_votos)*100)
+    return int((total_votos_partido / SumaVotos(escrutinio))*100)
 
 def HayPartidoExcluido(escrutinio) -> bool:
     return any(porcentaje < 3 for _, porcentaje in PorcentajeEscrutinio(escrutinio))

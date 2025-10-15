@@ -1,0 +1,13 @@
+def contar_aparicion_palabras(texto: str) -> dict:
+    diccionario = {}
+    for letra in texto:
+        if not letra in diccionario:
+            diccionario[letra] = texto.count(letra)
+    return diccionario
+
+print(contar_aparicion_palabras("la patata"))
+text = "la patata"
+print([{letra, text.count(letra)} for letra in set(text)])
+lista = [{letra, text.count(letra)} for letra in set(text)]
+for d in lista:
+    print(d)
