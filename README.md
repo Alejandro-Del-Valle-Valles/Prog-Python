@@ -16,3 +16,12 @@ Repositorio de los ejercicios realizados en el módulo de Programación en Pytho
   - Manejo de listas y Diccionarios.
   - Comprensión de listas.
   - Manejo superficila de clases.
+- **Tema 05: Lectura y Escritura de Ficheros**
+  - Lectura y escritura de ficheros de texto plano (.txt)
+  - Lectura y escritura de ficheros JSON.
+  - Serialización de ficheros.
+  - Cambio de codificación de ficheros de texto plano
+- **Tema 06: POO**
+  - Creación de clases y objetos
+  - Manejo de clases y objetos
+  - Instalación de librerías
