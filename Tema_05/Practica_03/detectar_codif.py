@@ -7,5 +7,3 @@ def detectar_codificacion(ruta) -> str:
         data = f.read()
     resultado = chardet.detect(data)
     return resultado["encoding"]
-
-#TOD: INSTALAR CHARDET
