@@ -1,42 +1,67 @@
 from abc import ABC, abstractmethod
+from service.ReglasToreno import ReglasTorneo
 
 class EnteMagico(ABC):
 
-    def __init__(self):
-        self._nombre
-        self.__vida
-        self._vida_maxima
+    def __init__(self, nombre: str, vida: int):
+        self._nombre = nombre
+        self.__vida = vida
+        self._vida_maxima = vida
 
     @property
-    def get_nombre(self, nombre: str) -> str:
+    def nombre(self) -> str:
         return self._nombre
 
-    @get_nombre.setter
-    def set_nombre(self, nombre: str):
-        nombre = nombre.strip().capitalize()
-        self._nombre = "Desconocido" if nombre == None or nombre == "" else nombre
+    @nombre.setter
+    def nombre(self, nombre: str):
+        """
+        Settea el nombre del EnteMagico capitalizado, y si el nombre no es válido, lo settea a "Desconocido".
+        
+        :param nombre: Nombre del EnteMagico.
+        :type nombre: str
+        """
+        self._nombre = nombre.strip().capitalize() if nombre and nombre.strip() else "Desconocido"
 
     @property
-    def get_vida(self) -> int:
+    def vida(self) -> int:
         return self.__vida
     
-    @get_vida.setter
-    def set_vida(self, vida: int):
+    @vida.setter
+    def vida(self, vida: int):
+        """
+        Settea la vida del EnteMagico, si es inferior a 0, lo settea a 0, y si es superior a la vida máxima, lo settea a la vida máxima.
+        
+        :param vida: Vida del ente EnteMagico.
+        :type vida: int
+        """
         if vida > 0:
             self.__vida = vida if self._vida_maxima >= vida else self._vida_maxima
         else:
+            print(self.nombre, " ha sido derrotado.")
             self.__vida = 0
 
     @property
-    def get_vida_maxima(self) -> int:
+    def vida_maxima(self) -> int:
         return self._vida_maxima
     
-    @get_vida_maxima.setter
-    def set_vida_maxima(self, vida_maxima: int):
+    @vida_maxima.setter
+    def vida_maxima(self, vida_maxima: int):
+        """
+        Settea la vida máxima 
+        
+        :param vida_maxima: Puntos de vida máxima del EnteMagico.
+        :type vida_maxima: int
+        """
         self._vida_maxima = vida_maxima if vida_maxima > 1 else 1
 
     @abstractmethod
     def atacar(self, enemigo: 'EnteMagico'):
+        """
+        Ataca al enemigo y le inflinge daño.
+        
+        :param enemigo: Enemigo a atacar
+        :type enemigo: 'EnteMagico'
+        """
         pass
 
     @abstractmethod

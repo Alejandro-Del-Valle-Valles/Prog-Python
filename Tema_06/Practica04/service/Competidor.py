@@ -1,2 +1,0 @@
-class Competidor:
-    pass

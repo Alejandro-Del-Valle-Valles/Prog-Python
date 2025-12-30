@@ -1,7 +1,7 @@
 class ReglasTorneo:
 
     @classmethod
-    def calcular_danyo(cls, danyo: int, defensa: int) -> int:
+    def calcular_danyo(cls, danyo: int, defensa: int):
         """
         Calcula el daño final que recibe el ente en base al daño base de su enemigo y a la defenesa del propio ente.
         
@@ -13,4 +13,4 @@ class ReglasTorneo:
         :return: daño inflingido.
         :rtype: int
         """
-        return danyo - defensa//2
+        return danyo if defensa <= 0 else danyo - defensa//2

@@ -1,45 +1,67 @@
-from EnteMagico import EnteMagico
+from models.EnteMagico import EnteMagico
+from service.ReglasToreno import ReglasTorneo
 
-class Campeon(EnteMagico):
+class Mago(EnteMagico):
 
-    def __init__(self, nombre: str, vida: int, vida_maxima: int, energia: int, hechizos: list[str]):
-        self.set_nombre(nombre)
-        self.set_vida_maxima(vida_maxima)
-        self.set_vida(vida)
+    def __init__(self, nombre: str, vida: int, energia: int):
+        super().__init__(nombre, vida)
         self.energia = energia
-        self.hechizos = hechizos
+        self.hechizos = []
 
     @property
-    def get_energia(self) -> int:
-        return self.energia
+    def energia(self) -> int:
+        return self._energia
     
-    @get_energia.setter
-    def set_energia(self, energia: int):
-        self.energia = energia if energia > 0 else 0
+    @energia.setter
+    def energia(self, energia: int):
+        """
+        Settea el nivel de energia del mago, si es inferior a 0, lo settea a 0.
+        
+        :param energia: Nivel de energia del mago
+        :type energia: int
+        """
+        self._energia = energia if energia > 0 else 0
 
     @property
-    def get_hechizos(self) -> list[str]:
-        return self.hechizos
+    def hechizos(self) -> list[str]:
+        return self._hechizos
     
-    @get_hechizos.setter
-    def set_hechizos(self, hechizos: list[str]):
-        self.hechizos = hechizos
+    @hechizos.setter
+    def hechizos(self, hechizos: list[str]):
+        self._hechizos = hechizos
 
     def aprender_hechizo(self, hechizo: str):
+        """
+        Añade un hechizo a la lista de hechizos del mago.
+        
+        :param hechizo: Nombre del hechizo
+        :type hechizo: str
+        """
         self.hechizos.append(hechizo)
 
     def atacar(self, enemigo: EnteMagico):
-        pass
+        """
+        Hace daño al enemigo con un hechizo.
+        
+        :param enemigo: Enemigo a atacar
+        :type enemigo: EnteMagico
+        """
+        danyo: int = 0
+        if self.energia >= 5:
+            self.energia -= 5
+            danyo = ReglasTorneo.calcular_danyo(20, 0)
+        enemigo.vida -= danyo
+        print(f"{self.nombre} lanza un hechizo a básico a {enemigo.nombre} (-{danyo} HP)")
 
     def __str__(self):
-        return f"Soy {self._nombre}, {f"tengo {self.__vida} puntos de vida" if self.__vida > 0 else "he sido derrotado,"}, tengo {self.energia} puntos de energía, y se usar {len(self.hechizos)}"
+        return f"[Mago] {self.nombre} | HP {self.vida}/{self.vida_maxima} | {self.energia} Energía | {len(self.hechizos)} Hechizo."
     
     def __repr__(self) -> str:
             """
-            :return: String JSON representation of the object.
+            :return: String con formato JSON del objeto.
             :rtype: str
             """
-            return f"{{\"nombre\": \"{self._nombre}\", \"vida\": {self.__vida}, \"vida_maxima\": {self._vida_maxima}, \"energia\": {self.energia}, \"hechizos\": {self.hechizos}}}"
+            return f"{{\"nombre\": \"{self.nombre}\", \"vida\": {self.vida}, \"vida_maxima\": {self.vida_maxima}, \"energia\": {self.energia}, \"hechizos\": {self.hechizos}}}"
     
     def __len__(self) -> int:
         return len(self.hechizos)
