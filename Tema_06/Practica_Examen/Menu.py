@@ -1,7 +1,7 @@
 class Menu:
     
     @classmethod
-    def show_menu():
+    def show_menu(cls):
         print("1. Alto")
         print("2. Listado")
         print("3. Baja")
