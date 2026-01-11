@@ -41,6 +41,7 @@ Y debe guardar los cambios cuando se termina el programa.
 ### TXT de longitúd fija
 Si sobran caracteres, se debe cortar, si falta, se rellena con espacios.
 Nombre: Longitúd fija de 10 caracteres. Si sobra, se debe cortar, si falta, se rellena con espacios.
+Edad: Longitúd de 2 caracteres 0 menos.
 Tipo de Sangre: Longitúd fija de 5 caracteres.
 Nota media: 4 caracteres en total, 2 enteros y 2 decimales, ten en cuenta que la coma ES un caracter.
 

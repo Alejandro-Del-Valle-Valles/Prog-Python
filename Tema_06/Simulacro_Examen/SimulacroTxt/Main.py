@@ -1,21 +1,17 @@
 #SOLUCIÓN CON JSON
-import json
 from Menu import Menu
 from Mago import Mago
 
-__NOMBRE_JSON = "magos.json"
+__NOMBRE_TXT = "magos.txt"
 DICCIONARIO_MAGOS = {} #Nombre clave, Mago valor
 
 def cargar_magos():
     try:
-        with open(__NOMBRE_JSON, "r", encoding="utf-8") as archivo:
-            magos = json.load(archivo)
-            for mago in magos:
-                nombre = mago["nombre"]
-                edad = mago["edad"]
-                sangre = mago["sangre"]
-                casa = mago["casa"]
-                nota_media = mago["nota_media"]
+        with open(__NOMBRE_TXT, "r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                nombre, edad, sangre, casa, nota_media = linea.strip().split()
+                edad = int(edad)
+                nota_media = float(nota_media)
                 DICCIONARIO_MAGOS[nombre] = Mago(nombre, edad, sangre, casa, nota_media)
     except FileNotFoundError:
         print("El fichero con los magos no se ha encontrado.")
@@ -86,17 +82,9 @@ def modificar_mago():
 
 def salir():
     try:
-        with open(__NOMBRE_JSON, "w", encoding="utf-8") as archivo:
-            magos = []
+        with open(__NOMBRE_TXT, "w", encoding="utf-8") as archivo:
             for mago in DICCIONARIO_MAGOS.values():
-                magos.append({
-                    "nombre": mago.nombre,
-                    "edad": mago.edad,
-                    "sangre": mago.sangre,
-                    "casa": mago.casa,
-                    "nota_media": mago.nota_media
-                })
-            json.dump(magos, archivo, ensure_ascii=False, indent=4)
+                print(f"{mago.nombre[:10]:10}{mago.edad:<3}{mago.sangre[:5]:5}{mago.casa}{mago.nota_media:.2f}", file=archivo)
     except Exception as ex:
         print(f"Ha ocurrido un error al guardar los magos: {ex}")
     print("Saliendo...")
