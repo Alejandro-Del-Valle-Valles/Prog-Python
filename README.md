@@ -25,3 +25,6 @@ Repositorio de los ejercicios realizados en el módulo de Programación en Pytho
   - Creación de clases y objetos
   - Manejo de clases y objetos
   - Instalación de librerías
+- **Tema 07: BBDD Relacionales (SQLite)**
+  - Conexión a BBDD
+  - Operaciones CRUD
