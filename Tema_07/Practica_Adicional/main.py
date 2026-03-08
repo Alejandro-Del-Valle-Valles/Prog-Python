@@ -1,6 +1,7 @@
 # Fichero principal de la practica
 from datetime import date, datetime
 from ErrorPersonalizado import ErrorPersonalizado
+from conexion import inicializar_tablas, cerrar_conexion
 
 OPCIONES: tuple = ("Gestionar Opciones", "Gestionar Productos", "Gestionar Pedidos", "Gestionar Detalles Pedido")
 COLOR_ROJO: str = "\033[31m" #Código del color rojo para los str.
@@ -131,14 +132,19 @@ def main():
     """
     Maneja el menú y la ejecución principal del programa.
     """
-    opcion = -1
-    while opcion != 0:
-        for i in range(len(OPCIONES)):
-            print(f"{i + 1}. {OPCIONES[i]}")
-        print("0. Salir")
-        opcion = pedir_numero_entero("Introduce una opción por favor: ")
-        manejar_menu(opcion)
-
+    try: 
+        inicializar_tablas()
+        opcion = -1
+        while opcion != 0:
+            for i in range(len(OPCIONES)):
+                print(f"{i + 1}. {OPCIONES[i]}")
+            print("0. Salir")
+            opcion = pedir_numero_entero("Introduce una opción por favor: ")
+            manejar_menu(opcion)
+    except:
+        print(f"{COLOR_ROJO}Ha ocurrido un error inesperado. Se ha finalizado el programa.{COLOR_RESET}")
+    finally:
+        cerrar_conexion()
 
 if __name__ == '__main__':
     main()
