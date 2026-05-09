@@ -1,8 +1,8 @@
 from decimal import Decimal
 
-class Productos:
+class Producto:
 
-    def __init__(self, id: int, nombre: str, precio: float, stock: int):
+    def __init__(self, nombre: str, precio: float, stock: int, id: int):
         self.__id = id
         self.nombre = nombre
         self.precio = precio
@@ -60,6 +60,6 @@ class Productos:
         return f"ID: {self.id} | Nombre: {self.nombre} | Precio: {self.precio}€ | Stock: {self.stock}"
     
     def __eq__(self, value):
-        if not isinstance(value, Productos):
+        if not isinstance(value, Producto):
             return False
         return value.id == self.id

@@ -24,7 +24,7 @@ def conectar():
             database = os.getenv("DATABASE")
         )
     except:
-        print(f"{COLOR_ROJO}Ha ocurrido un error con la apertura de la conexión.{COLOR_RESET}")
+        print(f"{COLOR_ROJO}Ha ocurrido un error con la obtención de la conexión.{COLOR_RESET}")
     return conexion
 
 
@@ -78,4 +78,6 @@ def inicializar_tablas(conexion):
             conexion.commit()
         except (Exception, Error) as ex:
             conexion.rollback()
+            CURSOR.close()
+            conexion.close()
             print(f"{COLOR_ROJO}Ha ocurrido un error durante la creación de las tablas: {ex}{COLOR_RESET}")

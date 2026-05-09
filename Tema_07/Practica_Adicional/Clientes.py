@@ -1,6 +1,6 @@
 class Cliente:
 
-    def __init__(self, id: int, nombre: str, email: str, telefono: str):
+    def __init__(self, nombre: str, email: str, telefono: str, id: int = 0):
         self.__id = id
         self.nombre = nombre
         self.email = email

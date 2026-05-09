@@ -1,9 +1,9 @@
 from datetime import date
 from decimal import Decimal
 
-class Pedidos:
+class Pedido:
 
-    def __init__(self, id_pedido: int, id_cliente: int, fecha: date, total: float):
+    def __init__(self, id_cliente: int, fecha: date, total: float, id_pedido: int = 0):
         self.__id_pedido = id_pedido
         self.__id_cliente = id_cliente
         self.fecha = fecha
@@ -50,6 +50,6 @@ class Pedidos:
         return f"ID Pedido: {self.id_pedido} | ID Cliente: {self.id_cliente} | Fecha: {self.fecha} | Total: {self.total}"
     
     def __eq__(self, value):
-        if not isinstance(value, Pedidos):
+        if not isinstance(value, Pedido):
             return False
         return value.id_pedido == self.id_pedido
