@@ -57,4 +57,4 @@ class Cliente:
         return self.id == value.id
     
     def __str__(self):
-        return f"Cliente -> Id: {self.id} | Nombre: {self.nombre} | Email: {self.email} | Tlfn: {self.telefono}"
+        return f"Id: {self.id} | Nombre: {self.nombre} | Email: {self.email} | Tlfn: {self.telefono}"
