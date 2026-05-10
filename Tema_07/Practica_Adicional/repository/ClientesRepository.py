@@ -1,5 +1,5 @@
-from Clientes import Cliente
-from Conexion import conectar
+from models.Clientes import Cliente
+from helpers.Conexion import conectar
 
 class ClientesCrud:
 #Clase encargada de realizar operaciones CRUD sobre clientes.
@@ -22,6 +22,26 @@ class ClientesCrud:
                 conexion.close()
 
         return clientes
+    
+    @staticmethod
+    def get_by_id(id: int) -> Cliente:
+        cliente: Cliente = None
+        conexion = conectar()
+        if conexion:
+            try:
+                cursor = conexion.cursor()
+                query = "SELECT nombre, email, telefono, id_cliente FROM Clientes WHERE id_cliente = %s"
+                cursor.execute(query, (id,))
+                datos = cursor.fetchone()
+                if datos:
+                    cliente = Cliente(*datos)
+            except:
+                conexion.rollback()
+            finally:
+                cursor.close()
+                conexion.close()
+
+        return cliente
 
 
     @staticmethod
@@ -33,6 +53,7 @@ class ClientesCrud:
                 cursor = conexion.cursor()
                 query = "INSERT INTO Clientes (nombre, email, telefono) VALUES (%s, %s, %s)"
                 cursor.execute(query, (cliente.nombre, cliente.email, cliente.telefono))
+                conexion.commit()
                 creado = cursor.rowcount > 0
             except:
                 conexion.rollback()
@@ -50,8 +71,9 @@ class ClientesCrud:
         if conexion:
             try:
                 cursor = conexion.cursor()
-                query = "UPATE Clientes SET nombre = %s, email = %s, telefono = %s WHERE id_cliente = %s"
+                query = "UPDATE Clientes SET nombre = %s, email = %s, telefono = %s WHERE id_cliente = %s"
                 cursor.execute(query, (cliente.nombre, cliente.email, cliente.telefono, cliente.id))
+                conexion.commit()
                 actualizado = cursor.rowcount > 0
             except:
                 conexion.rollback()
@@ -69,7 +91,8 @@ class ClientesCrud:
             try:
                 cursor = conexion.cursor()
                 query = "DELETE FROM Clientes WHERE id_cliente = %s"
-                cursor.execute(query, (id))
+                cursor.execute(query, (id,))
+                conexion.commit()
                 eliminado = cursor.rowcount > 0
             except:
                 conexion.rollback()

@@ -1,13 +1,13 @@
 # Fichero principal de la practica
 from datetime import date, datetime
-from ErrorPersonalizado import ErrorPersonalizado
-from Conexion import conectar, inicializar_tablas
-from SolicitarDatos import SolicitarDatos
-from ClientesManager import menu_clientes
-from ProductosManager import menu_productos
-from PedidosManager import menu_pedidos
-from DetallesManager import menu_detalles
-from Extensiones import printerr, limpiar_consola, pausa_y_limpia
+from helpers.ErrorPersonalizado import ErrorPersonalizado
+from helpers.Conexion import conectar, inicializar_tablas
+from helpers.SolicitarDatos import SolicitarDatos
+from managers.ClientesManager import menu_clientes
+from managers.ProductosManager import menu_productos
+from managers.PedidosManager import menu_pedidos
+from managers.DetallesManager import menu_detalles
+from helpers.Extensiones import printerr, limpiar_consola, pausa_y_limpia
 
 OPCIONES: tuple = ("Gestionar Clientes", "Gestionar Productos", "Gestionar Pedidos", "Gestionar Detalles Pedido")
 

@@ -3,7 +3,7 @@ import os
 import psycopg2
 from psycopg2 import Error
 from dotenv import load_dotenv
-from Extensiones import printerr
+from helpers.Extensiones import printerr
 
 def conectar():
     """Devuelve una conexión a la BBDD

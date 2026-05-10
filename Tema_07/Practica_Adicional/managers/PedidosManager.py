@@ -1,9 +1,9 @@
-from Pedidos import Pedido
-from ErrorPersonalizado import ErrorPersonalizado
-from ClientesCRUD import ClientesCrud
-from SolicitarDatos import SolicitarDatos
-from Extensiones import printerr, pausa_y_limpia, enter_limpiar
-from PedidosCRUD import PedidosCRUD
+from models.Pedidos import Pedido
+from helpers.ErrorPersonalizado import ErrorPersonalizado
+from repository.ClientesRepository import ClientesCrud
+from helpers.SolicitarDatos import SolicitarDatos
+from helpers.Extensiones import printerr, pausa_y_limpia, enter_limpiar
+from repository.PedidosRepository import PedidosCRUD
 from datetime import date
 
 __OPCIONES = ("Listar pedidos", "Crear pedidos", "Actualizar pedidos", "Eliminar pedidos")

@@ -1,14 +1,14 @@
-from Clientes import Cliente
-from ErrorPersonalizado import ErrorPersonalizado
-from ClientesCRUD import ClientesCrud
-from SolicitarDatos import SolicitarDatos
-from Extensiones import printerr, pausa_y_limpia
+from models.DetallesPedido import DetallePedido
+from helpers.ErrorPersonalizado import ErrorPersonalizado
+from repository.ClientesRepository import ClientesCrud
+from helpers.SolicitarDatos import SolicitarDatos
+from helpers.Extensiones import printerr, pausa_y_limpia
 
-__OPCIONES = ("Listar clientes", "Crear cliente", "Actualizar cliente", "Eliminar cliente")
+__OPCIONES = ("Listar detalles", "Crear detalles", "Actualizar detalles", "Eliminar detalles")
 
-def menu_clientes():
+def menu_detalles():
     """
-    Menú de gestión de datos de clientes
+    Menú de gestión de datos de detalles de pedidos
     """
     try:
         opcion: int = -1
@@ -19,7 +19,7 @@ def menu_clientes():
             opcion = SolicitarDatos.pedir_numero_entero("Introduce una opción por favor: ")
             __manejar_menu(opcion)
     except:
-        printerr("Ha ocurrido un error inesperado mientras se administraban los clientes. Volviendo al menu...")
+        printerr("Ha ocurrido un error inesperado mientras se administraban los pedidos. Volviendo al menu...")
         pausa_y_limpia(3)
 
 def __manejar_menu(opcion: int):

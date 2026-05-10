@@ -1,6 +1,6 @@
 from datetime import date, datetime
-from ErrorPersonalizado import ErrorPersonalizado
-from Extensiones import printerr
+from helpers.ErrorPersonalizado import ErrorPersonalizado
+from helpers.Extensiones import printerr
 
 __FORMATO_FECHA = "%d/%m/%Y"
 
@@ -61,12 +61,13 @@ class SolicitarDatos:
         return numero
 
     @staticmethod
-    def pedir_str(pregunta: str, longitud_maxima: int = None) -> str:
+    def pedir_str(pregunta: str, longitud_maxima: int = None, permitir_vacio: bool = False) -> str:
         """
         Pide un string al usuario. Mientras no introduzca nada o supere el nº de caracteres si lo hay, volverá a pedirlo.
         Args:
             pregunta (str): Pregunta a mostrar.
             longitud_maxima (int, optional): Longitud máxima (Incluida) permitida del texto. Defaults to None.
+            permitir_vacio (bool, optional): Permite devolver un texto vacío. Defaults to False.
 
         Returns:
             str: texto introducido
@@ -78,7 +79,7 @@ class SolicitarDatos:
                 texto = input().strip()
                 if longitud_maxima != None and len(texto) > longitud_maxima:
                     raise ErrorPersonalizado(f"El texto no puede contener más de {longitud_maxima} caracteres")
-                if not texto or texto == "":
+                if not permitir_vacio and (not texto or texto == ""):
                     raise ErrorPersonalizado("El texto no puede estar vacío.")
                 break
             except ErrorPersonalizado as ex:

@@ -1,8 +1,8 @@
-from Productos import Producto
-from ErrorPersonalizado import ErrorPersonalizado
-from ClientesCRUD import ClientesCrud
-from SolicitarDatos import SolicitarDatos
-from Extensiones import printerr, pausa_y_limpia
+from models.Productos import Producto
+from helpers.ErrorPersonalizado import ErrorPersonalizado
+from repository.ClientesRepository import ClientesCrud
+from helpers.SolicitarDatos import SolicitarDatos
+from helpers.Extensiones import printerr, pausa_y_limpia
 
 __OPCIONES = ("Listar productos", "Crear producto", "Actualizar producto", "Eliminar producto")
 

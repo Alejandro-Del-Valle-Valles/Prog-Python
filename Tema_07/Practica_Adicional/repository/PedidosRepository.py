@@ -1,7 +1,7 @@
-from Pedidos import Pedido
-from Conexion import conectar
+from models.Pedidos import Pedido
+from helpers.Conexion import conectar
 from psycopg2 import Error
-from ErrorPersonalizado import ErrorPersonalizado
+from helpers.ErrorPersonalizado import ErrorPersonalizado
 
 class PedidosCRUD:
 
@@ -35,7 +35,7 @@ class PedidosCRUD:
             try:
                 cursor = conexion.cursor()
                 query = "SELECT id_cliente, fecha, total, id_pedido FROM Pedidos WHERE id_pedido = %s"
-                cursor.execute(query, (id))
+                cursor.execute(query, (id,))
                 datos = cursor.fetchone()
                 if datos:
                     pedido = Pedido(*datos)

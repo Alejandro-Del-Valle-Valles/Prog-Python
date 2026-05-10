@@ -12,7 +12,7 @@ class Cliente:
     
     @property
     def nombre(self) -> str:
-        return self.nombre
+        return self.__nombre
     
     @nombre.setter
     def nombre(self, value: str):
@@ -21,11 +21,11 @@ class Cliente:
             raise ValueError("El nombre no puede estar vacío.")
         if len(value) > 100:
             raise ValueError("El nombre no puede tener más de 100 caracteres.")
-        self.nombre = value.capitalize()
+        self.__nombre = value.capitalize()
     
     @property
     def email(self) -> str:
-        return self.email
+        return self.__email
     
     @email.setter
     def email(self, value: str):
@@ -36,11 +36,11 @@ class Cliente:
             raise ValueError("El email no puede contener más de 150 caracteres.")
         if not '@' and '.' in value:
             raise ValueError("El email no tiene el formato correcto. Debe contener @ y extensión (.com, .es, etc)")
-        self.email = value
+        self.__email = value
 
     @property
-    def telefono(self, value: str) -> str:
-        return self.telefono
+    def telefono(self) -> str:
+        return self.__telefono
     
     @telefono.setter
     def telefono(self, value: str):
@@ -49,7 +49,7 @@ class Cliente:
             raise ValueError("El número de teléfono no puede estar vacío.")
         if len(value) > 20:
             raise ValueError("El número de teléfono no puede contenermás de 20 caracteres.")
-        self.telefono = value
+        self.__telefono = value
 
     def __eq__(self, value) -> bool:
         if not isinstance(value, Cliente):
