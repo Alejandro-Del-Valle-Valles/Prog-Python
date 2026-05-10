@@ -3,10 +3,13 @@ from datetime import date, datetime
 from ErrorPersonalizado import ErrorPersonalizado
 from Conexion import conectar, inicializar_tablas
 from SolicitarDatos import SolicitarDatos
+from ClientesManager import menu_clientes
+from ProductosManager import menu_productos
+from PedidosManager import menu_pedidos
+from DetallesManager import menu_detalles
+from Extensiones import printerr, limpiar_consola, pausa_y_limpia
 
-OPCIONES: tuple = ("Gestionar Opciones", "Gestionar Productos", "Gestionar Pedidos", "Gestionar Detalles Pedido")
-COLOR_ROJO: str = "\033[31m" #Código del color rojo para los str.
-COLOR_RESET: str = "\033[0m"
+OPCIONES: tuple = ("Gestionar Clientes", "Gestionar Productos", "Gestionar Pedidos", "Gestionar Detalles Pedido")
 
 #MÉTODOS MENU
 def manejar_menu(opcion: int):
@@ -18,16 +21,25 @@ def manejar_menu(opcion: int):
     match(opcion) :
         case 0:
             print("Saliendo del programa...")
+            pausa_y_limpia(3)
         case 1:
-            pass
+            limpiar_consola()
+            menu_clientes()
+            limpiar_consola()
         case 2:
-            pass
+            limpiar_consola()
+            menu_productos()
+            limpiar_consola()
         case 3:
-            pass
+            limpiar_consola()
+            menu_pedidos()
+            limpiar_consola()
         case 4:
-            pass
+            limpiar_consola()
+            menu_detalles()
+            limpiar_consola()
         case _:
-            print(f"{COLOR_ROJO}La opción elegida no es válida{COLOR_RESET}")
+            printerr("La opción elegida no es válida")
 
 def main():
     """
@@ -47,9 +59,9 @@ def main():
             opcion = SolicitarDatos.pedir_numero_entero("Introduce una opción por favor: ")
             manejar_menu(opcion)
     except ErrorPersonalizado as ex:
-        print(f"{COLOR_ROJO}{ex}{COLOR_RESET}")
+        printerr(ex)
     except:
-        print(f"{COLOR_ROJO}Ha ocurrido un error inesperado. Se ha finalizado el programa.{COLOR_RESET}")
+        printerr("Ha ocurrido un error inesperado. Se ha finalizado el programa.")
     finally:
         if conexion:
             conexion.close()

@@ -27,7 +27,7 @@ class DetallePedido:
     
     @cantidad.setter
     def cantidad(self, value: int):
-        if value == None:
+        if not value:
             raise ValueError("La cantidad no puede ser nula.")
         if value < 0:
             raise ValueError("La cantidad no puede ser negativa.")
@@ -39,7 +39,7 @@ class DetallePedido:
     
     @subtotal.setter
     def subtotal(self, value: float):
-        if value == None:
+        if not value:
             raise ValueError("El subtotal no puede ser nulo.")
         if value < 0:
             raise ValueError("El subtotal no puede ser negativo.")

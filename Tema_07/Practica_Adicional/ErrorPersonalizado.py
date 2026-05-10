@@ -4,3 +4,4 @@ class ErrorPersonalizado(Exception):
     Args:
         Exception (_type_): Hereda de Excepción
     """
+    pass

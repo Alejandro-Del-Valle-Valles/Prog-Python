@@ -3,9 +3,7 @@ import os
 import psycopg2
 from psycopg2 import Error
 from dotenv import load_dotenv
-
-COLOR_ROJO: str = "\033[31m" #Código del color rojo para los str.
-COLOR_RESET: str = "\033[0m"
+from Extensiones import printerr
 
 def conectar():
     """Devuelve una conexión a la BBDD
@@ -23,8 +21,8 @@ def conectar():
             port = os.getenv("PORT"),
             database = os.getenv("DATABASE")
         )
-    except:
-        print(f"{COLOR_ROJO}Ha ocurrido un error con la obtención de la conexión.{COLOR_RESET}")
+    except (Exception, Error) as ex:
+        printerr(f"Ha ocurrido un error con la obtención de la conexión: {ex}")
     return conexion
 
 
@@ -80,4 +78,4 @@ def inicializar_tablas(conexion):
             conexion.rollback()
             CURSOR.close()
             conexion.close()
-            print(f"{COLOR_ROJO}Ha ocurrido un error durante la creación de las tablas: {ex}{COLOR_RESET}")
+            printerr(f"Ha ocurrido un error durante la creación de las tablas: {ex}")

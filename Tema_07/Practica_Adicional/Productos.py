@@ -19,7 +19,7 @@ class Producto:
     @nombre.setter
     def nombre(self, value: str):
         value = value.strip()
-        if value == None or value == "":
+        if not value or value == "":
             raise ValueError("El nombre no puede estar vacío.")
         if len(value) > 150:
             raise ValueError("El nombre no puede tener más de 150 caracteres.")
@@ -31,7 +31,7 @@ class Producto:
     
     @precio.setter
     def precio(self, value: float):
-        if value == None:
+        if not value:
             raise ValueError("El precio no puede estar vacío.")
         if value < 0:
             raise ValueError("El precio no puede ser negativo.")
@@ -50,7 +50,7 @@ class Producto:
     
     @stock.setter
     def stock(self, value: int):
-        if value == None:
+        if not value:
             raise ValueError("El stock no puede ser nulo.")
         if value < 0:
             raise ValueError("El stock no puede ser negativo.")

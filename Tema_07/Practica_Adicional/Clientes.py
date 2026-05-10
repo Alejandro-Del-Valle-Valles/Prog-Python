@@ -17,7 +17,7 @@ class Cliente:
     @nombre.setter
     def nombre(self, value: str):
         value = value.strip()
-        if value == None or value == "":
+        if not value or value == "":
             raise ValueError("El nombre no puede estar vacío.")
         if len(value) > 100:
             raise ValueError("El nombre no puede tener más de 100 caracteres.")
@@ -30,7 +30,7 @@ class Cliente:
     @email.setter
     def email(self, value: str):
         value = value.strip()
-        if value == None or value == "":
+        if not value or value == "":
             raise ValueError("El email no puede estar vacío.")
         if len(value) > 150:
             raise ValueError("El email no puede contener más de 150 caracteres.")
@@ -45,7 +45,7 @@ class Cliente:
     @telefono.setter
     def telefono(self, value: str):
         value = value.strip()
-        if value == None or value == "":
+        if not value or value == "":
             raise ValueError("El número de teléfono no puede estar vacío.")
         if len(value) > 20:
             raise ValueError("El número de teléfono no puede contenermás de 20 caracteres.")

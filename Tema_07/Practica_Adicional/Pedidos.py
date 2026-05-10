@@ -19,32 +19,29 @@ class Pedido:
     
     @property
     def fecha(self) -> date:
-        return self.fecha
+        return self.__fecha
     
     @fecha.setter
     def fecha(self, value: date):
-        if value == None:
+        if not value:
             raise ValueError("La fecha no puede ser nula")
-        self.fecha = value
+        self.__fecha = value
 
     @property
     def total(self) -> float:
-        return self.total
+        return self.__total
     
     @total.setter
     def total(self, value: float):
-        if value == None:
+        if not value:
             raise ValueError("El total no puede ser nulo.")
         if value < 0:
             raise ValueError("El total no puede ser negativo.")
-        d = Decimal(str(value)).normalize()
-        digits_tuple = d.as_tuple()
         
-        total_digits = len(digits_tuple.digits)
-        decimal_places = abs(digits_tuple.exponent)
-        if total_digits > 10 or decimal_places > 2:
-            raise ValueError("El total no puede tener más de 10 dígitos y no pude tener más de 3 decimales.")
-        self.total = value
+        d = Decimal(str(value)).normalize()
+        if len(d.as_tuple().digits) > 10 or abs(d.as_tuple().exponent) > 2:
+            raise ValueError("Total exceeds 10 digits or 2 decimal places.")
+        self.__total = value
 
     def __str__(self):
         return f"ID Pedido: {self.id_pedido} | ID Cliente: {self.id_cliente} | Fecha: {self.fecha} | Total: {self.total}"
