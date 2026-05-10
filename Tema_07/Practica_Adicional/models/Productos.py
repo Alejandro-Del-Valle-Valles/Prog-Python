@@ -35,13 +35,13 @@ class Producto:
             raise ValueError("El precio no puede estar vacío.")
         if value < 0:
             raise ValueError("El precio no puede ser negativo.")
-        d = Decimal(str(value)).normalize()
-        digits_tuple = d.as_tuple()
         
-        total_digits = len(digits_tuple.digits)
-        decimal_places = abs(digits_tuple.exponent)
-        if total_digits > 10 or decimal_places > 2:
-            raise ValueError("El precio no puede tener más de 10 dígitos y no pude tener más de 3 decimales.")
+        partes = str(float(value)).split('.')
+        enteros = partes[0]
+        decimales = partes[1] if len(partes) > 1 else ""
+        if len(enteros) > 8 or len(decimales) > 2:
+            raise ValueError("El subtotal no puede exceder los 10 dígitos (máximo 8 enteros y 2 decimales).")
+        
         self.__precio = value
         
     @property

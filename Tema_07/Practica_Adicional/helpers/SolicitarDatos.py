@@ -2,11 +2,10 @@ from datetime import date, datetime
 from helpers.ErrorPersonalizado import ErrorPersonalizado
 from helpers.Extensiones import printerr
 
-__FORMATO_FECHA = "%d/%m/%Y"
-
-
 class SolicitarDatos:
 # Clase Auxiliar para Solicitar Datos
+
+    FORMATO_FECHA = "%d/%m/%Y"
 
     @staticmethod
     def pedir_numero_entero(pregunta: str, es_positivo: bool = False, permitir_nulo = True) -> int:
@@ -104,12 +103,12 @@ class SolicitarDatos:
             try:
                 print(pregunta + " (dd/MM/yyyy)")
                 fecha_input: str = input().strip()
-                fecha = datetime.strptime(fecha_input, __FORMATO_FECHA).date()
+                fecha = datetime.strptime(fecha_input, SolicitarDatos.FORMATO_FECHA).date()
                 if fecha_maxima and fecha > fecha_maxima:
-                    raise ErrorPersonalizado(f"La fecha no puede ser mayor a {fecha_maxima.strftime(__FORMATO_FECHA)}")
+                    raise ErrorPersonalizado(f"La fecha no puede ser mayor a {fecha_maxima.strftime(SolicitarDatos.FORMATO_FECHA)}")
                 break
             except ErrorPersonalizado as ex:
                 printerr(ex)
             except:
-                printerr("Debes introducir una fecha con el formato indicado.")
+                printerr("Debes introducir una fecha con el formato indicado. No puede ser posterior a hoy.")
         return fecha

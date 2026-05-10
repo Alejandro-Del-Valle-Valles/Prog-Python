@@ -23,7 +23,7 @@ class DetallePedido:
     
     @property
     def cantidad(self) -> int:
-        return self.cantidad
+        return self.__cantidad
     
     @cantidad.setter
     def cantidad(self, value: int):
@@ -31,11 +31,11 @@ class DetallePedido:
             raise ValueError("La cantidad no puede ser nula.")
         if value < 0:
             raise ValueError("La cantidad no puede ser negativa.")
-        self.cantidad = value
+        self.__cantidad = value
 
     @property
     def subtotal(self) -> float:
-        return self.subtotal
+        return self.__subtotal
     
     @subtotal.setter
     def subtotal(self, value: float):
@@ -43,15 +43,14 @@ class DetallePedido:
             raise ValueError("El subtotal no puede ser nulo.")
         if value < 0:
             raise ValueError("El subtotal no puede ser negativo.")
-        d = Decimal(str(value)).normalize()
-        digits_tuple = d.as_tuple()
         
-        total_digits = len(digits_tuple.digits)
-        decimal_places = abs(digits_tuple.exponent)
-        if total_digits > 10 or decimal_places > 2:
-            raise ValueError("El subtotal no puede tener más de 10 dígitos y no pude tener más de 3 decimales.")
+        partes = str(float(value)).split('.')
+        enteros = partes[0]
+        decimales = partes[1] if len(partes) > 1 else ""
+        if len(enteros) > 8 or len(decimales) > 2:
+            raise ValueError("El subtotal no puede exceder los 10 dígitos (máximo 8 enteros y 2 decimales).")
         
-        self.subtotal = value
+        self.__subtotal = value
 
     def __str__(self):
         return f"ID Detalle Pedido: {self.__id_detalle} | ID Pedido: {self.__id_pedido} | ID Producto: {self.__id_producto} | Cantidad: {self.cantidad} | Subtotal: {self.subtotal}€"

@@ -38,9 +38,12 @@ class Pedido:
         if value < 0:
             raise ValueError("El total no puede ser negativo.")
         
-        d = Decimal(str(value)).normalize()
-        if len(d.as_tuple().digits) > 10 or abs(d.as_tuple().exponent) > 2:
-            raise ValueError("Total exceeds 10 digits or 2 decimal places.")
+        partes = str(float(value)).split('.')
+        enteros = partes[0]
+        decimales = partes[1] if len(partes) > 1 else ""
+        if len(enteros) > 8 or len(decimales) > 2:
+            raise ValueError("El subtotal no puede exceder los 10 dígitos (máximo 8 enteros y 2 decimales).")
+        
         self.__total = value
 
     def __str__(self):
