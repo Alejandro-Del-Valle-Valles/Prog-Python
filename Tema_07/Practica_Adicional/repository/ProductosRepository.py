@@ -29,7 +29,7 @@ class ProductosCRUD:
         if conexion:
             try:
                 cursor = conexion.cursor()
-                query = "SELECT nombre, precio, soctk, id_producto FROM Productos WHERE id_producto = %s"
+                query = "SELECT nombre, precio, stock, id_producto FROM Productos WHERE id_producto = %s"
                 cursor.execute(query, (id,))
                 datos = cursor.fetchone()
                 if datos:
@@ -70,7 +70,7 @@ class ProductosCRUD:
         if conexion:
             try:
                 cursor = conexion.cursor()
-                query = "UPATE Productos SET nombre = %s, precio = %s, stock = %s WHERE id_producto = %s"
+                query = "UPDATE Productos SET nombre = %s, precio = %s, stock = %s WHERE id_producto = %s"
                 cursor.execute(query, (producto.nombre, producto.precio, producto.stock, producto.id))
                 conexion.commit()
                 actualizado = cursor.rowcount > 0

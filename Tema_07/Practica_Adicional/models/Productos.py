@@ -14,7 +14,7 @@ class Producto:
     
     @property
     def nombre(self) -> str:
-        return self.nombre
+        return self.__nombre
     
     @nombre.setter
     def nombre(self, value: str):
@@ -23,11 +23,11 @@ class Producto:
             raise ValueError("El nombre no puede estar vacío.")
         if len(value) > 150:
             raise ValueError("El nombre no puede tener más de 150 caracteres.")
-        self.nombre = value.capitalize()
+        self.__nombre = value.capitalize()
 
     @property
     def precio(self) -> float:
-        return self.precio
+        return self.__precio
     
     @precio.setter
     def precio(self, value: float):
@@ -42,11 +42,11 @@ class Producto:
         decimal_places = abs(digits_tuple.exponent)
         if total_digits > 10 or decimal_places > 2:
             raise ValueError("El precio no puede tener más de 10 dígitos y no pude tener más de 3 decimales.")
-        self.precio = value
+        self.__precio = value
         
     @property
     def stock(self) -> int:
-        return self.stock
+        return self.__stock
     
     @stock.setter
     def stock(self, value: int):
@@ -54,7 +54,7 @@ class Producto:
             raise ValueError("El stock no puede ser nulo.")
         if value < 0:
             raise ValueError("El stock no puede ser negativo.")
-        self.stock = value
+        self.__stock = value
 
     def __str__(self) -> str:
         return f"ID: {self.id} | Nombre: {self.nombre} | Precio: {self.precio}€ | Stock: {self.stock}"
